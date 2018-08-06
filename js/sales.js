@@ -14,8 +14,15 @@ function customersPerHour(){
 // Calculates projected sales =
 // average cookies per customer * # of customers
 // rounding down
-function salesPerHour(){
-  return Math.floor(this.avgCookiesPerCust * this.hourlyCustomers());
+function getHourlySales(){
+  //For each hour in the workday (6am - 8pm)
+  //generate a projected sales per hour and store 
+  //in the salesPerHour array
+  var salesArray = [];
+  for(var i = 0; i < 15; i++){
+   salesArray.push(Math.floor(this.avgCookiesPerCust * this.getHourlyCustomers()));
+  }
+  return salesArray;
 }
 
 
@@ -27,9 +34,8 @@ var firstAndPike = {
   minCust: 23,
   maxCust: 65,
   avgCookiesPerCust: 6.3,
-  hourlyCustomers: customersPerHour,
-  hourlySales: salesPerHour,
-  storeInfo: [this.minCust, this.maxCust, this.avgCookiesPerCust, this.hourlyCustomers, this.hourlySales]
+  getHourlyCustomers: customersPerHour,
+  hourlySales: getHourlySales
 };
 
 var seatac = {
@@ -37,8 +43,7 @@ var seatac = {
   maxCust: 24,
   avgCookiesPerCust: 1.2,
   hourlyCustomers: customersPerHour,
-  hourlySales: salesPerHour,
-  storeInfo: [this.minCust, this.maxCust, this.avgCookiesPerCust, this.hourlyCustomers, this.hourlySales]
+  hourlySales: getHourlySales
 };
 
 var seattleCenter = {
@@ -46,8 +51,7 @@ var seattleCenter = {
   maxCust: 38,
   avgCookiesPerCust: 3.7,
   hourlyCustomers: customersPerHour,
-  hourlySales: salesPerHour,
-  storeInfo: [this.minCust, this.maxCust, this.avgCookiesPerCust, this.hourlyCustomers, this.hourlySales]
+  hourlySales: getHourlySales
 };
 
 var capitolHill = {
@@ -55,8 +59,7 @@ var capitolHill = {
   maxCust: 38,
   avgCookiesPerCust: 2.3,
   hourlyCustomers: customersPerHour,
-  hourlySales: salesPerHour,
-  storeInfo: [this.minCust, this.maxCust, this.avgCookiesPerCust, this.hourlyCustomers, this.hourlySales]
+  hourlySales: getHourlySales
 };
 
 var alki = {
@@ -64,6 +67,5 @@ var alki = {
   maxCust: 16,
   avgCookiesPerCust: 4.6,
   hourlyCustomers: customersPerHour,
-  hourlySales: salesPerHour,
-  storeInfo: [this.minCust, this.maxCust, this.avgCookiesPerCust, this.hourlyCustomers, this.hourlySales]
+  hourlySales: getHourlySales
 };
