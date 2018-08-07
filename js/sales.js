@@ -10,6 +10,7 @@ function customersPerHour(){
   return Math.floor(Math.random() * (this.maxCust - this.minCust) + this.minCust);
 }
 
+
 // Calculates projected sales =
 // average cookies per customer * # of customers
 // rounding down
@@ -75,65 +76,31 @@ function addStoreInfo(){
 }
 
 
+// Store constructor
+function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
+  this.name = name;
+  this.maxCust = maxCustomers;
+  this.minCust = minCustomers;
+  this.avgCookiesPerCust = avgCookiesPerCustomer;
+  this.getHourlyCustomers: customersPerHour;
+  this.getSalesData; getHourlySales;
+  //this.addStoreInfo = addStoreInfo;
+}
 
-/*********************************************************
- *               Define store object literals
- *********************************************************/
-var firstAndPike = {
-  name: 'First and Pike',
-  minCust: 23,
-  maxCust: 65,
-  avgCookiesPerCust: 6.3,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
 
-var seatac = {
-  name: 'Seatac',
-  minCust: 3,
-  maxCust: 24,
-  avgCookiesPerCust: 1.2,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
-
-var seattleCenter = {
-  name: 'Seattle Center',
-  minCust: 11,
-  maxCust: 38,
-  avgCookiesPerCust: 3.7,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
-
-var capitolHill = {
-  name: 'Capitol Hill',
-  minCust: 20,
-  maxCust: 38,
-  avgCookiesPerCust: 2.3,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
-
-var alki = {
-  name: 'Alki',
-  minCust: 2,
-  maxCust: 16,
-  avgCookiesPerCust: 4.6,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
-
-var storeList = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
 
 /*********************************************************
  *                    Start Page Action
  *********************************************************/
-for(var i=0; i < storeList.length; i++){
-  storeList[i].addStoreInfo();
-}
+var storeNames = ['First and Pike', 'Seatac', 'Seattle Center', 'Capitol Hill', 'Alki'];
+
+//Create stores
+var firstAndPike, seatac, seattleCenter, capitolHill, alki;
+var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
+
+//Create table
+//Add store data to table
+
+// for(var i=0; i < storeList.length; i++){
+//   storeList[i].addStoreInfo();
+// }
