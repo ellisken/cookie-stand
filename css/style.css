@@ -26,6 +26,12 @@ header{
   background-color: salmon;
 }
 
+img.centered, .aligncenter, div.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .navlink{
   margin-left: 40px;
   margin-right: 40px;

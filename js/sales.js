@@ -3,6 +3,15 @@
 /*********************************************************
  *                     Define functions
  *********************************************************/
+// Store constructor
+function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
+  this.name = name;
+  this.maxCust = maxCustomers;
+  this.minCust = minCustomers;
+  this.avgCookiesPerCust = avgCookiesPerCustomer;
+}
+
+
 // Generates a random whole number of customers
 // within the range of [minCust, maxCust]
 // rounding down
@@ -22,6 +31,7 @@ function getHourlySales(){
   for(var i = 0; i < 15; i++){
     salesArray.push(Math.floor(this.avgCookiesPerCust * this.getHourlyCustomers()));
   }
+  console.log(salesArray);
   return salesArray;
 }
 
@@ -35,27 +45,21 @@ function addChildWithText(elementType, textContent, parent){
 }
 
 
-// Creates an unordered list with a store's information
-// in the DOM
-function addStoreInfo(){
-  //Grab the div called "store-lists"
-  var storeInfoDiv = document.getElementById('store-lists');
+//Adds a table with header to the page.
+function addStoreTable(){
+  //Create table
+  var storeInfoDiv = document.getElementById('store-data');
+  var storeTable = document.createElement('table');
 
-  //Create a new header and add to page
-  addChildWithText('h3', this.name, storeInfoDiv);
+  //Create header
+  var tableHeader = document.createElement('thead');
+  var thRow = document.createElement('tr');
+  tableHeader.appendChild(thRow);
 
-  //Create a new unordered list
-  var storeList = document.createElement('ul');
-  //Append unordered list to the parent div
-  storeInfoDiv.appendChild(storeList);
-  //Create array with store's sales data
-  var storeData = this.getSalesData();
-  console.log(storeData);
-  //For each number in the sales data list
-  var total = 0;
-  for(var i = 0; i < storeData.length; i++){
-    //Add to running total
-    total += storeData[i];
+  //Create a header row
+  thRow.appendChild(document.createElement('th'));
+  //Create a column name for each hour of the store's day
+  for(var i=0; i < 15; i++){
     var hour = (i + 6) % 12; //Get actual hour
     //Set hour to '1' if result from above is zero
     if(hour === 0){
@@ -68,39 +72,82 @@ function addStoreInfo(){
     else{
       hour = hour + 'pm';
     }
-    //Create list element and append to unordered list
-    addChildWithText('li', `${hour}: ${storeData[i]} cookies`, storeList);
+    var columnName = document.createElement('th');
+    columnName.textContent = hour;
+    tableHeader.appendChild(columnName);
   }
-  //Create "total cookies" list item and append
-  addChildWithText('li', `Total: ${total} cookies`, storeList);
+  //Add sales total column
+  columnName = document.createElement('th');
+  columnName.textContent = 'Sales Total';
+  tableHeader.appendChild(columnName);
+  
+  storeTable.appendChild(tableHeader);
+  //Create table body
+  var body = document.createElement('tbody');
+  storeTable.appendChild(body);
+  body.setAttribute('id', 'storeTableBody');
+  storeInfoDiv.appendChild(storeTable);
+  return storeTable;
 }
 
 
-// Store constructor
-function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
-  this.name = name;
-  this.maxCust = maxCustomers;
-  this.minCust = minCustomers;
-  this.avgCookiesPerCust = avgCookiesPerCustomer;
-  this.getHourlyCustomers: customersPerHour;
-  this.getSalesData; getHourlySales;
-  //this.addStoreInfo = addStoreInfo;
+//Adds a store's data to a table as a row
+function renderStoreData(){
+  //Create row and add to table body
+  var storeRow = document.createElement('tr');
+  var tableBody = document.getElementById('storeTableBody');
+  tableBody.appendChild(storeRow);
+
+  //Add the store's name
+  var storeName = document.createElement('td');
+  storeName.textContent = this.name;
+  storeRow.appendChild(storeName);
+
+  var total = 0; //For tracking total sales for a store
+
+  //For each attribute, create a cell
+  var storeSalesData = this.getHourlySales();
+  //console.log(storeSalesData);
+  for(var i=0; i < storeSalesData.length; i++){
+    var salesDataCell = document.createElement('td');
+    salesDataCell.textContent = storeSalesData[i];
+    storeRow.appendChild(salesDataCell);
+    total += storeSalesData[i];
+  }
+  salesDataCell = document.createElement('td');
+  salesDataCell.textContent = total;
+  storeRow.appendChild(salesDataCell);
+  tableBody.appendChild(storeRow);
 }
+
+
+// Add methods to Store prototype
+Store.prototype.getHourlyCustomers = customersPerHour;
+Store.prototype.getHourlySales = getHourlySales;
+Store.prototype.createStoreRow = renderStoreData;
 
 
 
 /*********************************************************
  *                    Start Page Action
  *********************************************************/
-var storeNames = ['First and Pike', 'Seatac', 'Seattle Center', 'Capitol Hill', 'Alki'];
+var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2], 
+  ['Seattle Center', 11, 38, 3.7], ['Capitol Hill', 20, 38, 2.3], ['Alki', 2, 16, 4.6]];
 
 //Create stores
 var firstAndPike, seatac, seattleCenter, capitolHill, alki;
 var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
 
+for(var i=0; i < stores.length; i++){
+  stores[i] = new Store(storeData[i][0], storeData[i][1], storeData[i][2], storeData[i][3]);
+}
+
+
+
+
 //Create table
+addStoreTable();
+
 //Add store data to table
 
-// for(var i=0; i < storeList.length; i++){
-//   storeList[i].addStoreInfo();
-// }
+
