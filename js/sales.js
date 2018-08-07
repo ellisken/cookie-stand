@@ -177,9 +177,16 @@ function addHourlyTotalsFooter(){
   //For each column, calculate total,
   //create data cell, and append to footerRow
   for(var i=0; i < 16; i++){
-
+    //calculate that column's total
+    var total = 0;
+    for(var j=0; j < 5; j++){
+      console.log(salesDataArray[j][i]);
+      total += parseInt(salesDataArray[j][i]);
+    }
+    var newDataCell = document.createElement('td');
+    newDataCell.textContent = total;
+    footerRow.appendChild(newDataCell);
   }
-
 }
 
 
@@ -212,5 +219,6 @@ for(i=0; i < stores.length; i++){
 }
 
 //Add footer with hourly totals
+addHourlyTotalsFooter();
 
 
