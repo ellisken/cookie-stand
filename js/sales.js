@@ -11,6 +11,11 @@ function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
   this.avgCookiesPerCust = avgCookiesPerCustomer;
 }
 
+//sum function used for .reduce()
+function sum(a, b){
+  return a + b;
+}
+
 
 // Generates a random whole number of customers
 // within the range of [minCust, maxCust]
@@ -49,6 +54,7 @@ function addStoreTable(){
   //Create table
   var storeInfoDiv = document.getElementById('store-data');
   var storeTable = document.createElement('table');
+  storeTable.setAttribute('id', 'store-table');
 
   //Create header
   var tableHeader = document.createElement('thead');
@@ -109,6 +115,7 @@ function renderStoreData(){
   for(var i=0; i < storeSalesData.length; i++){
     var salesDataCell = document.createElement('td');
     salesDataCell.textContent = storeSalesData[i];
+    salesDataCell.className = i + this.name;
     storeRow.appendChild(salesDataCell);
     total += storeSalesData[i];
   }
@@ -116,6 +123,29 @@ function renderStoreData(){
   salesDataCell.textContent = total;
   storeRow.appendChild(salesDataCell);
   tableBody.appendChild(storeRow);
+}
+
+
+// Adds a footer with sales totals for each hour to the table
+function addHourlyTotalsFooter(){
+  var table = document.getElementById('store-table');
+
+  //Create a table footer, append to table
+  var footer = document.createElement('tfoot');
+  table.appendChild(footer);
+
+  //Create a table row, append to footer
+  var footerRow = document.createElement('tr');
+  footer.appendChild(footerRow);
+
+  //Add a dummy cell for the first column
+  footerRow.appendChild(document.createElement('td'));
+
+  //For each hour, calculate total
+ 
+
+  //Create a table cell with total and append to footer
+
 }
 
 
