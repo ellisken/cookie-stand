@@ -10,6 +10,7 @@ function customersPerHour(){
   return Math.floor(Math.random() * (this.maxCust - this.minCust) + this.minCust);
 }
 
+
 // Calculates projected sales =
 // average cookies per customer * # of customers
 // rounding down
@@ -75,7 +76,6 @@ function addStoreInfo(){
 }
 
 
-
 /*********************************************************
  *               Define store object literals
  *********************************************************/
@@ -129,6 +129,8 @@ var alki = {
   addStoreInfo: addStoreInfo
 };
 
+
+//List of all store objects
 var storeList = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
 
 /*********************************************************
