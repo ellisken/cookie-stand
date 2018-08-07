@@ -31,7 +31,6 @@ function getHourlySales(){
   for(var i = 0; i < 15; i++){
     salesArray.push(Math.floor(this.avgCookiesPerCust * this.getHourlyCustomers()));
   }
-  console.log(salesArray);
   return salesArray;
 }
 
@@ -142,12 +141,12 @@ for(var i=0; i < stores.length; i++){
   stores[i] = new Store(storeData[i][0], storeData[i][1], storeData[i][2], storeData[i][3]);
 }
 
-
-
-
 //Create table
 addStoreTable();
 
 //Add store data to table
+for(i=0; i < stores.length; i++){
+  stores[i].createStoreRow();
+}
 
 
