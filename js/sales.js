@@ -103,7 +103,7 @@ function renderStoreData(){
   tableBody.appendChild(storeRow);
 
   //Add the store's name
-  var storeName = document.createElement('td');
+  var storeName = document.createElement('th');
   storeName.textContent = this.name;
   storeRow.appendChild(storeName);
 
@@ -126,6 +126,36 @@ function renderStoreData(){
 }
 
 
+// Create multi-dimensional array of sales amounts
+// (effectively creates a model of the hourly sales data
+// in the sales data table on the page)
+function createSalesDataArray(){
+  //Get all table cells
+  var tableCells = document.querySelectorAll('td');
+  var tableCellData = [];
+  for(var j=0; j < tableCells.length; j++){
+    tableCellData.push(tableCells[j].innerHTML);
+  }
+
+  //Multi-dimensional array to store table data
+  //There will be 
+  var salesDataMatrix = [];
+
+  //Grab items from tableCells in chunks of 16
+  // for each of the 5 stores
+  var k = 1;
+  for(var i=0; i < stores.length; i++){
+    //For each chunk of 16, add to a list
+    //Add that list to salesDataMatrix
+    var dataRow = tableCellData.slice((k-1) * 16, k * 16);
+    salesDataMatrix.push(dataRow);
+    k++;
+  }
+  return salesDataMatrix;
+}
+
+
+
 // Adds a footer with sales totals for each hour to the table
 function addHourlyTotalsFooter(){
   var table = document.getElementById('store-table');
@@ -140,11 +170,15 @@ function addHourlyTotalsFooter(){
 
   //Add a dummy cell for the first column
   footerRow.appendChild(document.createElement('td'));
+  
+  //Get sales data from the DOM
+  var salesDataArray =  createSalesDataArray();
 
-  //For each hour, calculate total
- 
+  //For each column, calculate total,
+  //create data cell, and append to footerRow
+  for(var i=0; i < 16; i++){
 
-  //Create a table cell with total and append to footer
+  }
 
 }
 
@@ -165,7 +199,6 @@ var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2],
 //Create stores
 var firstAndPike, seatac, seattleCenter, capitolHill, alki;
 var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
-
 for(var i=0; i < stores.length; i++){
   stores[i] = new Store(storeData[i][0], storeData[i][1], storeData[i][2], storeData[i][3]);
 }
@@ -177,5 +210,7 @@ addStoreTable();
 for(i=0; i < stores.length; i++){
   stores[i].createStoreRow();
 }
+
+//Add footer with hourly totals
 
 
