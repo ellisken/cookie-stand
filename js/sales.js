@@ -3,6 +3,20 @@
 /*********************************************************
  *                     Define functions
  *********************************************************/
+// Store constructor
+function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
+  this.name = name;
+  this.maxCust = maxCustomers;
+  this.minCust = minCustomers;
+  this.avgCookiesPerCust = avgCookiesPerCustomer;
+}
+
+//sum function used for .reduce()
+function sum(a, b){
+  return a + b;
+}
+
+
 // Generates a random whole number of customers
 // within the range of [minCust, maxCust]
 // rounding down
@@ -35,107 +49,176 @@ function addChildWithText(elementType, textContent, parent){
 }
 
 
-// Creates an unordered list with a store's information
-// in the DOM
-function addStoreInfo(){
-  //Grab the div called "store-lists"
-  var storeInfoDiv = document.getElementById('store-lists');
+//Adds a table with header to the page.
+function addStoreTable(){
+  //Create table
+  var storeInfoDiv = document.getElementById('store-data');
+  var storeTable = document.createElement('table');
+  storeTable.setAttribute('id', 'store-table');
 
-  //Create a new header and add to page
-  addChildWithText('h3', this.name, storeInfoDiv);
+  //Create header
+  var tableHeader = document.createElement('thead');
+  var thRow = document.createElement('tr');
+  tableHeader.appendChild(thRow);
 
-  //Create a new unordered list
-  var storeList = document.createElement('ul');
-  //Append unordered list to the parent div
-  storeInfoDiv.appendChild(storeList);
-  //Create array with store's sales data
-  var storeData = this.getSalesData();
-  console.log(storeData);
-  //For each number in the sales data list
-  var total = 0;
-  for(var i = 0; i < storeData.length; i++){
-    //Add to running total
-    total += storeData[i];
-    var hour = (i + 6) % 12; //Get actual hour
-    //Set hour to '1' if result from above is zero
-    if(hour === 0){
-      hour++;
-    }
+  //Create a header row
+  thRow.appendChild(document.createElement('th'));
+  //Create a column name for each hour of the store's day
+  for(var i=0; i < 15; i++){
+    var hour = (i + 6) % 24; //Get actual hour
     //Set am/pm
-    if(i < 12){ 
-      hour = hour + 'am';
+    if(hour > 12){ 
+      hour = (hour - 12) + 'pm';
     }
-    else{
+    else if(hour === 12){
       hour = hour + 'pm';
     }
-    //Create list element and append to unordered list
-    addChildWithText('li', `${hour}: ${storeData[i]} cookies`, storeList);
+    else{
+      hour = hour + 'am';
+    }
+    var columnName = document.createElement('th');
+    columnName.textContent = hour;
+    thRow.appendChild(columnName);
   }
-  //Create "total cookies" list item and append
-  addChildWithText('li', `Total: ${total} cookies`, storeList);
+  //Add sales total column
+  columnName = document.createElement('th');
+  columnName.textContent = 'Sales Total';
+  thRow.appendChild(columnName);
+  
+  storeTable.appendChild(tableHeader);
+  //Create table body
+  var body = document.createElement('tbody');
+  storeTable.appendChild(body);
+  body.setAttribute('id', 'storeTableBody');
+  storeInfoDiv.appendChild(storeTable);
+  return storeTable;
 }
 
 
-/*********************************************************
- *               Define store object literals
- *********************************************************/
-var firstAndPike = {
-  name: 'First and Pike',
-  minCust: 23,
-  maxCust: 65,
-  avgCookiesPerCust: 6.3,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
+//Adds a store's data to a table as a row
+function renderStoreData(){
+  //Create row and add to table body
+  var storeRow = document.createElement('tr');
+  var tableBody = document.getElementById('storeTableBody');
+  tableBody.appendChild(storeRow);
 
-var seatac = {
-  name: 'Seatac',
-  minCust: 3,
-  maxCust: 24,
-  avgCookiesPerCust: 1.2,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
+  //Add the store's name
+  var storeName = document.createElement('th');
+  storeName.textContent = this.name;
+  storeRow.appendChild(storeName);
 
-var seattleCenter = {
-  name: 'Seattle Center',
-  minCust: 11,
-  maxCust: 38,
-  avgCookiesPerCust: 3.7,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
+  var total = 0; //For tracking total sales for a store
 
-var capitolHill = {
-  name: 'Capitol Hill',
-  minCust: 20,
-  maxCust: 38,
-  avgCookiesPerCust: 2.3,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
-
-var alki = {
-  name: 'Alki',
-  minCust: 2,
-  maxCust: 16,
-  avgCookiesPerCust: 4.6,
-  getHourlyCustomers: customersPerHour,
-  getSalesData: getHourlySales,
-  addStoreInfo: addStoreInfo
-};
+  //For each attribute, create a cell
+  var storeSalesData = this.getHourlySales();
+  //console.log(storeSalesData);
+  for(var i=0; i < storeSalesData.length; i++){
+    var salesDataCell = document.createElement('td');
+    salesDataCell.textContent = storeSalesData[i];
+    salesDataCell.className = i + this.name;
+    storeRow.appendChild(salesDataCell);
+    total += storeSalesData[i];
+  }
+  salesDataCell = document.createElement('td');
+  salesDataCell.textContent = total;
+  storeRow.appendChild(salesDataCell);
+  tableBody.appendChild(storeRow);
+}
 
 
-//List of all store objects
-var storeList = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
+// Create multi-dimensional array of sales amounts
+// (effectively creates a model of the hourly sales data
+// in the sales data table on the page)
+function createSalesDataArray(){
+  //Get all table cells
+  var tableCells = document.querySelectorAll('td');
+  var tableCellData = [];
+  for(var j=0; j < tableCells.length; j++){
+    tableCellData.push(tableCells[j].innerHTML);
+  }
+
+  //Multi-dimensional array to store table data
+  //There will be 
+  var salesDataMatrix = [];
+
+  //Grab items from tableCells in chunks of 16
+  // for each of the 5 stores
+  var k = 1;
+  for(var i=0; i < stores.length; i++){
+    //For each chunk of 16, add to a list
+    //Add that list to salesDataMatrix
+    var dataRow = tableCellData.slice((k-1) * 16, k * 16);
+    salesDataMatrix.push(dataRow);
+    k++;
+  }
+  return salesDataMatrix;
+}
+
+
+
+// Adds a footer with sales totals for each hour to the table
+function addHourlyTotalsFooter(){
+  var table = document.getElementById('store-table');
+
+  //Create a table footer, append to table
+  var footer = document.createElement('tfoot');
+  table.appendChild(footer);
+
+  //Create a table row, append to footer
+  var footerRow = document.createElement('tr');
+  footer.appendChild(footerRow);
+
+  //Add a dummy cell for the first column
+  footerRow.appendChild(document.createElement('td'));
+  
+  //Get sales data from the DOM
+  var salesDataArray =  createSalesDataArray();
+
+  //For each column, calculate total,
+  //create data cell, and append to footerRow
+  for(var i=0; i < 16; i++){
+    //calculate that column's total
+    var total = 0;
+    for(var j=0; j < 5; j++){
+      total += parseInt(salesDataArray[j][i]);
+    }
+    var newDataCell = document.createElement('td');
+    newDataCell.textContent = total;
+    footerRow.appendChild(newDataCell);
+  }
+}
+
+
+// Add methods to Store prototype
+Store.prototype.getHourlyCustomers = customersPerHour;
+Store.prototype.getHourlySales = getHourlySales;
+Store.prototype.createStoreRow = renderStoreData;
+
+
+
 
 /*********************************************************
  *                    Start Page Action
  *********************************************************/
-for(var i=0; i < storeList.length; i++){
-  storeList[i].addStoreInfo();
+var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2], 
+  ['Seattle Center', 11, 38, 3.7], ['Capitol Hill', 20, 38, 2.3], ['Alki', 2, 16, 4.6]];
+
+//Create stores
+var firstAndPike, seatac, seattleCenter, capitolHill, alki;
+var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
+for(var i=0; i < stores.length; i++){
+  stores[i] = new Store(storeData[i][0], storeData[i][1], storeData[i][2], storeData[i][3]);
 }
+
+//Create table
+addStoreTable();
+
+//Add store data to table
+for(i=0; i < stores.length; i++){
+  stores[i].createStoreRow();
+}
+
+//Add footer with hourly totals
+addHourlyTotalsFooter();
+
+
