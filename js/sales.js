@@ -59,26 +59,25 @@ function addStoreTable(){
   thRow.appendChild(document.createElement('th'));
   //Create a column name for each hour of the store's day
   for(var i=0; i < 15; i++){
-    var hour = (i + 6) % 12; //Get actual hour
-    //Set hour to '1' if result from above is zero
-    if(hour === 0){
-      hour++;
-    }
+    var hour = (i + 6) % 24; //Get actual hour
     //Set am/pm
-    if(i < 12){ 
-      hour = hour + 'am';
+    if(hour > 12){ 
+      hour = (hour - 12) + 'pm';
+    }
+    else if(hour === 12){
+      hour = hour + 'pm';
     }
     else{
-      hour = hour + 'pm';
+      hour = hour + 'am';
     }
     var columnName = document.createElement('th');
     columnName.textContent = hour;
-    tableHeader.appendChild(columnName);
+    thRow.appendChild(columnName);
   }
   //Add sales total column
   columnName = document.createElement('th');
   columnName.textContent = 'Sales Total';
-  tableHeader.appendChild(columnName);
+  thRow.appendChild(columnName);
   
   storeTable.appendChild(tableHeader);
   //Create table body
