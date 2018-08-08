@@ -1,6 +1,6 @@
 'use strict';
 
-var storeCt = 0; //Global variable for tracking number of stores
+var storeCt = 0; //Global variable for tracking number of stores - updates
 var hourCt = 15; //Global variable for tracking number of hours to display
 
 /*********************************************************
@@ -13,7 +13,6 @@ function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
   this.minCust = minCustomers;
   this.avgCookiesPerCust = avgCookiesPerCustomer;
 }
-
 
 
 // Generates a random whole number of customers
@@ -32,7 +31,7 @@ function getHourlySales(){
   //generate a projected sales per hour and store
   //in the salesPerHour array
   var salesArray = [];
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < hourCt; i++){
     salesArray.push(Math.floor(this.avgCookiesPerCust * this.getHourlyCustomers()));
   }
   return salesArray;
@@ -54,7 +53,7 @@ function addStoreTable(){
   //Create a header row
   thRow.appendChild(document.createElement('th'));
   //Create a column name for each hour of the store's day
-  for(var i=0; i < 15; i++){
+  for(var i=0; i < hourCt; i++){
     var hour = (i + 6) % 24; //Get actual hour
     //Set am/pm
     if(hour > 12){
@@ -201,7 +200,8 @@ function addNewStoreToTable(e){
   //Add that store's values to the table by appending to
   //the table body
   newStore.createStoreRow();
-  storeCt++; //Increment store count
+
+  storeCt++; //Increment global store count
 
   //Update the table footer
   addHourlyTotalsFooter();
@@ -222,7 +222,7 @@ Store.prototype.createStoreRow = renderStoreData;
 var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2],
   ['Seattle Center', 11, 38, 3.7], ['Capitol Hill', 20, 38, 2.3], ['Alki', 2, 16, 4.6]];
 
-//Create stores
+//Create first 5 stores
 var firstAndPike, seatac, seattleCenter, capitolHill, alki;
 var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
 for(var i=0; i < stores.length; i++){
