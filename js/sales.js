@@ -11,10 +11,6 @@ function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
   this.avgCookiesPerCust = avgCookiesPerCustomer;
 }
 
-//sum function used for .reduce()
-function sum(a, b){
-  return a + b;
-}
 
 
 // Generates a random whole number of customers
@@ -30,22 +26,13 @@ function customersPerHour(){
 // rounding down
 function getHourlySales(){
   //For each hour in the workday (6am - 8pm)
-  //generate a projected sales per hour and store 
+  //generate a projected sales per hour and store
   //in the salesPerHour array
   var salesArray = [];
   for(var i = 0; i < 15; i++){
     salesArray.push(Math.floor(this.avgCookiesPerCust * this.getHourlyCustomers()));
   }
   return salesArray;
-}
-
-
-//Adds a child of the given elementType with the
-//specified textContent to parent
-function addChildWithText(elementType, textContent, parent){
-  var newElement = document.createElement(elementType);
-  newElement.textContent = textContent;
-  parent.appendChild(newElement);
 }
 
 
@@ -67,7 +54,7 @@ function addStoreTable(){
   for(var i=0; i < 15; i++){
     var hour = (i + 6) % 24; //Get actual hour
     //Set am/pm
-    if(hour > 12){ 
+    if(hour > 12){
       hour = (hour - 12) + 'pm';
     }
     else if(hour === 12){
@@ -84,7 +71,7 @@ function addStoreTable(){
   columnName = document.createElement('th');
   columnName.textContent = 'Sales Total';
   thRow.appendChild(columnName);
-  
+
   storeTable.appendChild(tableHeader);
   //Create table body
   var body = document.createElement('tbody');
@@ -200,7 +187,7 @@ Store.prototype.createStoreRow = renderStoreData;
 /*********************************************************
  *                    Start Page Action
  *********************************************************/
-var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2], 
+var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2],
   ['Seattle Center', 11, 38, 3.7], ['Capitol Hill', 20, 38, 2.3], ['Alki', 2, 16, 4.6]];
 
 //Create stores
