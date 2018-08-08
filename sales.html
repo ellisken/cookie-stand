@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Sales</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="css/vanilla-unreset.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/vanilla-unreset.css" /> -->
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
@@ -14,32 +14,33 @@
   <a href="index.html" class="navlink">Home</a> 
   <h1>Sales Projections</h1>
   <div id="store-data" class="data"></div>
-  <formset>
+  <form id="addNewStoreForm">
     <legend>
-      Add a new store
+    Add a new store
     </legend>
-    <label for="name">
+    <fieldset>
+      <label for="name">
       Store Name:
+      </label>
       <input type="text" id="name" name="name" size="30" maxlength="50">
-    </label>
-    <br />
-    <label for="minCustCt">
+      <br />
+      <label for="minCustCt">
       Minimum customers per hour:
+      </label>
       <input type="number" name="minCustCt" id="minCustCt" step="1" min="1" max="1000">
-    </label>
-    <br />
-    <label for="maxCustCt">
+      <br />
+      <label for="maxCustCt">
       Maximum customers per hour:
+      </label>
       <input type="number" name="maxCustCt" id="maxCustCt" step="1" min="1" max="1000">
-    </label>
-    <br />
-    <label for="avgPurchaseCt">
+      <br />
+      <label for="avgPurchaseCt">
       Average cookies purchased per customer:
+      </label>
       <input type="number" name="avgPurchaseCt" id="avgPurchaseCt" step="1" min="1" max="1000">
-    </label>
-    <br />
-    <input type="submit" value="Add store to table" />
-  </formset>
+    </fieldset>
+    <input type="submit" id="form-submit" value="Add store to table" />
+  </form>
 </body>
 <script src="js/sales.js"></script>
 </html>

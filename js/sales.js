@@ -142,7 +142,6 @@ function createSalesDataArray(){
 }
 
 
-
 // Adds a footer with sales totals for each hour to the table
 function addHourlyTotalsFooter(){
   var table = document.getElementById('store-table');
@@ -179,6 +178,21 @@ function addHourlyTotalsFooter(){
 }
 
 
+// Gets form data and adds new row to table
+// for the new store
+function addNewStoreToTable(e){
+  //Prevent default page refresh
+  e.preventDefault();
+
+  //Get form values and instantiate new Store object
+  var newStore = new Store(e.target.name.value, e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value); 
+  console.log(newStore);
+
+  //Add that store's values to the footer by appending to
+  //the table body
+}
+
+
 // Add methods to Store prototype
 Store.prototype.getHourlyCustomers = customersPerHour;
 Store.prototype.getHourlySales = getHourlySales;
@@ -210,5 +224,9 @@ for(i=0; i < stores.length; i++){
 
 //Add footer with hourly totals
 addHourlyTotalsFooter();
+
+//Add event listener to form submit
+var submitFormButton = document.getElementById('addNewStoreForm');
+submitFormButton.addEventListener('submit', addNewStoreToTable);
 
 
