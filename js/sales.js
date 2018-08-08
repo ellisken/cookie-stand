@@ -109,9 +109,9 @@ function renderStoreData(){
 
   var total = 0; //For tracking total sales for a store
 
-  //For each attribute, create a cell
+  //Generate hourly sales data and save for later use
   var storeSalesData = this.getHourlySales();
-  //console.log(storeSalesData);
+  //Add a cell for each hour's data
   for(var i=0; i < storeSalesData.length; i++){
     var salesDataCell = document.createElement('td');
     salesDataCell.textContent = storeSalesData[i];
@@ -119,6 +119,7 @@ function renderStoreData(){
     storeRow.appendChild(salesDataCell);
     total += storeSalesData[i];
   }
+  //Add a cell for the day's total sales
   salesDataCell = document.createElement('td');
   salesDataCell.textContent = total;
   storeRow.appendChild(salesDataCell);
@@ -138,7 +139,6 @@ function createSalesDataArray(){
   }
 
   //Multi-dimensional array to store table data
-  //There will be 
   var salesDataMatrix = [];
 
   //Grab items from tableCells in chunks of 16
@@ -170,7 +170,7 @@ function addHourlyTotalsFooter(){
 
   //Add a dummy cell for the first column
   footerRow.appendChild(document.createElement('td'));
-  
+
   //Get sales data from the DOM
   var salesDataArray =  createSalesDataArray();
 
