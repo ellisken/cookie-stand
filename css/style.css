@@ -1,9 +1,9 @@
-/* img, nav, fieldset, form, label, legend,
+img, nav, fieldset, form, label, legend,
 table, tbody, tfoot, thead, footer, header, a {
 	margin: 10px;
   padding: 0;
   outline: 2px black dashed;
-} */
+}
 
 h1, h2, h3, h4, h5, h6{
   margin: 10px;
@@ -11,17 +11,25 @@ h1, h2, h3, h4, h5, h6{
   outline: 2px red dashed;
 }
 
-/* div{
-  margin: 10px;
+div{
+  margin: 10px, 10px, 10px, 10px;
   padding: 10px;
   outline: 2px blue dashed;
+  overflow: auto;
+  width: 100%;
 }
 
 p{
   margin: 10px;
   padding: 10px;
   outline: 2px purple dashed;
-} */
+}
+
+ul{
+  margin: 10px;
+  padding: 10px;
+  outline: 2px pink dashed;
+}
 
 img{
   border-radius: 50%;
@@ -30,7 +38,10 @@ img{
 }
 
 .ALCdiv{
-  display: inline-block;
+  width: 30%;
+  float: left;
+  margin: 10px;
+  padding: 5px;
 }
 
 #welcome-div{
