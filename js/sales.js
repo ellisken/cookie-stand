@@ -147,6 +147,9 @@ function createSalesDataArray(){
 function addHourlyTotalsFooter(){
   var table = document.getElementById('store-table');
 
+  //If table footer exists, delete it so that
+  //it can be replaced with the new footer values
+
   //Create a table footer, append to table
   var footer = document.createElement('tfoot');
   table.appendChild(footer);
