@@ -185,11 +185,12 @@ function addNewStoreToTable(e){
   e.preventDefault();
 
   //Get form values and instantiate new Store object
-  var newStore = new Store(e.target.name.value, e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value); 
-  console.log(newStore);
+  var newStore = new Store(e.target.name.value, 
+    e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value); 
 
   //Add that store's values to the footer by appending to
   //the table body
+  newStore.createStoreRow();
 }
 
 
