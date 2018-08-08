@@ -1,5 +1,8 @@
 'use strict';
 
+var storeCt = 0; //Global variable for tracking number of stores
+var hourCt = 15; //Global variable for tracking number of hours to display
+
 /*********************************************************
  *                     Define functions
  *********************************************************/
@@ -131,7 +134,7 @@ function createSalesDataArray(){
   //Grab items from tableCells in chunks of 16
   // for each of the 5 stores
   var k = 1;
-  for(var i=0; i < stores.length; i++){
+  for(var i=0; i < storeCt; i++){
     //For each chunk of 16, add to a list
     //Add that list to salesDataMatrix
     var dataRow = tableCellData.slice((k-1) * 16, k * 16);
@@ -146,12 +149,19 @@ function createSalesDataArray(){
 function addHourlyTotalsFooter(){
   var table = document.getElementById('store-table');
 
-  //If table footer exists, delete it so that
-  //it can be replaced with the new footer values
-
   //Create a table footer, append to table
   var footer = document.createElement('tfoot');
-  table.appendChild(footer);
+
+  //If table footer exists
+  var tableFooter = document.getElementsByTagName('tfoot')[0];
+  if(tableFooter !== undefined){
+    //Replace element
+    tableFooter.parentNode.replaceChild(footer, tableFooter);
+  }
+  //Else append new element
+  else{
+    table.appendChild(footer);
+  }
 
   //Create a table row, append to footer
   var footerRow = document.createElement('tr');
@@ -168,7 +178,7 @@ function addHourlyTotalsFooter(){
   for(var i=0; i < 16; i++){
     //calculate that column's total
     var total = 0;
-    for(var j=0; j < 5; j++){
+    for(var j=0; j < storeCt; j++){
       total += parseInt(salesDataArray[j][i]);
     }
     var newDataCell = document.createElement('td');
@@ -188,9 +198,13 @@ function addNewStoreToTable(e){
   var newStore = new Store(e.target.name.value, 
     e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value); 
 
-  //Add that store's values to the footer by appending to
+  //Add that store's values to the table by appending to
   //the table body
   newStore.createStoreRow();
+  storeCt++; //Increment store count
+
+  //Update the table footer
+  addHourlyTotalsFooter();
 }
 
 
@@ -213,13 +227,14 @@ var firstAndPike, seatac, seattleCenter, capitolHill, alki;
 var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
 for(var i=0; i < stores.length; i++){
   stores[i] = new Store(storeData[i][0], storeData[i][1], storeData[i][2], storeData[i][3]);
+  storeCt++;
 }
 
 //Create table
 addStoreTable();
 
 //Add store data to table
-for(i=0; i < stores.length; i++){
+for(i=0; i < storeCt; i++){
   stores[i].createStoreRow();
 }
 
@@ -229,5 +244,7 @@ addHourlyTotalsFooter();
 //Add event listener to form submit
 var submitFormButton = document.getElementById('addNewStoreForm');
 submitFormButton.addEventListener('submit', addNewStoreToTable);
+
+
 
 
