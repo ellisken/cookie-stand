@@ -7,6 +7,17 @@ table, tbody, tfoot, thead, footer, header, a {
 
 nav{
   padding: 10px;
+  overflow: auto;
+  width: 100%;
+}
+
+.navlink{
+  float: right;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 h1{
@@ -97,12 +108,17 @@ thead, tfoot{
   padding: 5px;
 }
 
-#main-title{
-  vertical-align: middle;
+#main-title, #salmon{
+  float: left;
 }
 
 #salmon{
   max-width: 15%;
+}
+
+#three-main-columns{
+  overflow: auto;
+  width: 100%;
 }
 
 #welcome-div{
