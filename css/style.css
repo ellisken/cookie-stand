@@ -1,4 +1,4 @@
-main, nav, fieldset, form, label, legend,
+main, nav, fieldset, label, legend,
 tbody, tfoot, thead, footer, header, a {
 	margin: 10px;
   padding: 0;
@@ -10,11 +10,20 @@ body{
   color: #3c4663;
 }
 
+table{
+  margin: auto;
+}
+
+
 nav{
   padding: 10px;
   margin: 10px;
   width: auto;
   /* outline: 2px green dashed; */
+}
+
+form, fieldset{
+  text-align: left;
 }
 
 .navlink{
@@ -32,7 +41,7 @@ h1{
   margin: 10px;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, legend{
   margin: 10px;
   padding: 10px;
   /* outline: 2px red dashed; */
@@ -76,7 +85,7 @@ td, th{
   border: 1px solid transparent;
   height: 30px;
   transition: all 0.3s;
-  padding: 3px;
+  padding: 9px;
 }
 
 th{
@@ -85,10 +94,7 @@ th{
 
 td{
   text-align: center;
-}
-
-th, td{
-  padding: 6px;
+  vertical-align: center;
 }
 
 tr:nth-child(even) td{
@@ -119,6 +125,16 @@ div.ALCdiv{
 
 div.ALCdiv h2{
   font-size: 25px;
+}
+
+h1.sales-page, legend{
+  font-size: 30px;
+}
+
+label, input{
+  margin: 3px;
+  display: block;
+  width: 300px;
 }
 
 main{
@@ -152,4 +168,24 @@ main{
   font-family: 'Fjalla One';
   text-align: center;
   color: whitesmoke;
+}
+
+#store-data{
+  text-align: center;
+  width: auto;
+  padding: 15px;
+}
+
+#newStoreForm{
+  width: 500px;
+  margin: 50px auto 100px auto;
+}
+
+#form-submit{
+  position: relative;
+  left: 10px;
+}
+
+#addNewStoreDiv{
+  padding: 0px;
 }

@@ -18,10 +18,10 @@
 
   <main>
     <!-- Sales Projections Table -->
-    <h1>Sales Projections</h1>
+    <h1 class="sales-page">Daily Sales Projections</h1>
     <div id="store-data" class="data"></div>
     <div id="addNewStoreDiv">
-      <form id="addNewStoreForm">
+      <form id="newStoreForm">
         <legend>
         Add a new store
         </legend>
@@ -44,9 +44,9 @@
           <label for="avgPurchaseCt" required>
           Average cookies purchased per customer:
           </label>
-          <input type="number" name="avgPurchaseCt" id="avgPurchaseCt" step="1" min="1" max="1000" required>
+          <input type="number" name="avgPurchaseCt" id="avgPurchaseCt" step="0.01" min="1" max="1000" required> </br>
         </fieldset>
-        <input type="submit" id="form-submit" value="Add store to table" />
+        <input type="submit" id="form-submit" value="Add store to table" /> 
       </form>
     </div>
   </main>
