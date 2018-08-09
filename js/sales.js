@@ -15,11 +15,13 @@ function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
 }
 
 
-// Generates a random whole number of customers
+// Generates a random int of customers
 // within the range of [minCust, maxCust]
-// rounding down
+// rounding down to the nearest whole number
 function customersPerHour(){
-  return Math.floor(Math.random() * (this.maxCust - this.minCust) + this.minCust);
+  var min = Math.ceil(this.minCust);
+  var max = Math.floor(this.maxCust);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 
@@ -194,8 +196,8 @@ function addNewStoreToTable(e){
   e.preventDefault();
 
   //Get form values and instantiate new Store object
-  var newStore = new Store(e.target.name.value, 
-    e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value); 
+  var newStore = new Store(e.target.name.value,
+    e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value);
 
   //Add that store's values to the table by appending to
   //the table body
