@@ -5,6 +5,11 @@ tbody, tfoot, thead, footer, header, a {
   /* outline: 2px black dashed; */
 }
 
+body{
+  background-color:whitesmoke;
+  color: #3c4663;
+}
+
 nav{
   padding: 10px;
   margin: 10px;
@@ -14,7 +19,7 @@ nav{
 }
 
 .navlink{
-  color: black;
+  color: #3c4663;
   display: inline-block;
   text-align: center;
   padding: 14px 16px;
@@ -23,7 +28,7 @@ nav{
 }
 
 h1{
-  font-size: 36px;
+  font-size: 45px;
   margin: 10px;
 }
 
@@ -51,12 +56,6 @@ ul{
   margin: 10px;
   padding: 10px;
   /* outline: 2px pink dashed; */
-}
-
-img{
-  border-radius: 50%;
-  max-width: 100%;
-  max-height: 100%;
 }
 
 table{
@@ -124,11 +123,11 @@ main{
 #welcome-div{
   background-image: url(../assets/salmon.png);
   background-repeat: no-repeat;
-  background-size: 50%;
+  background-size: 65%;
   background-position: center;
   height: 400px;
   background-color: salmon;
-  box-shadow: 0 0 8px 8px white inset;
+  box-shadow: 0 0 8px 8px white inset; */
 }
 
 #main-title{
@@ -137,12 +136,13 @@ main{
 
 #introduction-p{
   text-align: center;
-  font-family: sans-serif;
-  color: black;
+  font-family: "Fjalla One";
+  color: whitesmoke;
+  font-size: 24px;
 }
 
 #about{
-  font-size: 50px;
+  font-size: 45px;
   font-family: 'Fjalla One';
   text-align: center;
   color: whitesmoke;
