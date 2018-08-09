@@ -20,36 +20,36 @@
     <!-- Sales Projections Table -->
     <h1 class="sales-page">Daily Sales Projections</h1>
     <div id="store-data" class="data"></div>
-    <div id="addNewStoreDiv">
-      <form id="newStoreForm">
-        <legend>
-        Add a new store
-        </legend>
-        <fieldset>
-          <label for="name">
-          Store Name:
-          </label>
-          <input type="text" id="name" name="name" size="30" maxlength="50" required>
-          <br />
-          <label for="minCustCt">
-          Minimum customers per hour:
-          </label>
-          <input type="number" name="minCustCt" id="minCustCt" step="1" min="1" max="1000" required>
-          <br />
-          <label for="maxCustCt">
-          Maximum customers per hour:
-          </label>
-          <input type="number" name="maxCustCt" id="maxCustCt" step="1" min="1" max="1000" required>
-          <br />
-          <label for="avgPurchaseCt" required>
-          Average cookies purchased per customer:
-          </label>
-          <input type="number" name="avgPurchaseCt" id="avgPurchaseCt" step="0.01" min="1" max="1000" required> </br>
-        </fieldset>
-        <input type="submit" id="form-submit" value="Add store to table" /> 
-      </form>
-    </div>
   </main>
+  <div id="addNewStoreDiv">
+    <form id="newStoreForm">
+      <legend>
+      Add a new store
+      </legend>
+      <fieldset>
+        <label for="name">
+        Store Name:
+        </label>
+        <input type="text" id="name" name="name" size="30" maxlength="50" required>
+        <br />
+        <label for="minCustCt">
+        Minimum customers per hour:
+        </label>
+        <input type="number" name="minCustCt" id="minCustCt" step="1" min="1" max="1000" required>
+        <br />
+        <label for="maxCustCt">
+        Maximum customers per hour:
+        </label>
+        <input type="number" name="maxCustCt" id="maxCustCt" step="1" min="1" max="1000" required>
+        <br />
+        <label for="avgPurchaseCt" required>
+        Average cookies purchased per customer:
+        </label>
+        <input type="number" name="avgPurchaseCt" id="avgPurchaseCt" step="0.01" min="1" max="1000" required> </br>
+      </fieldset>
+      <input type="submit" id="form-submit" value="Add store to table" /> 
+    </form>
+  </div>
 </body>
 <script src="js/sales.js"></script>
 </html>

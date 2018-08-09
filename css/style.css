@@ -133,6 +133,7 @@ h1.sales-page, legend{
 
 label, input{
   margin: 3px;
+  margin-bottom: -5px;
   display: block;
   width: 300px;
 }
@@ -178,14 +179,16 @@ main{
 
 #newStoreForm{
   width: 500px;
-  margin: 50px auto 100px auto;
 }
 
 #form-submit{
   position: relative;
   left: 10px;
+  font-family: "Fjalla One";
+  margin-bottom: 10px;
 }
 
 #addNewStoreDiv{
   padding: 0px;
+  margin: 30px;
 }
