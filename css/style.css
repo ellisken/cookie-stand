@@ -2,13 +2,14 @@ img, nav, fieldset, form, label, legend,
 table, tbody, tfoot, thead, footer, header, a {
 	margin: 10px;
   padding: 0;
-  outline: 2px black dashed;
+  /* outline: 2px black dashed; */
 }
 
 nav{
   padding: 10px;
+  margin: 10px;
   overflow: auto;
-  width: 100%;
+  width: 98%;
 }
 
 .navlink{
@@ -28,13 +29,13 @@ h1{
 h1, h2, h3, h4, h5, h6{
   margin: 10px;
   padding: 0;
-  outline: 2px red dashed;
+  /* outline: 2px red dashed; */
 }
 
 div{
   margin: 10px, 10px, 10px, 10px;
   padding: 10px;
-  outline: 2px blue dashed;
+  /* outline: 2px blue dashed; */
   overflow: auto;
   width: 100%;
 }
@@ -42,13 +43,13 @@ div{
 p{
   margin: 10px;
   padding: 10px;
-  outline: 2px purple dashed;
+  /* outline: 2px purple dashed; */
 }
 
 ul{
   margin: 10px;
   padding: 10px;
-  outline: 2px pink dashed;
+  /* outline: 2px pink dashed; */
 }
 
 img{
@@ -62,6 +63,7 @@ table{
   width: 640px;
   border-collapse: collapse;
   border-spacing: 0;
+  border: 2px black solid;
 }
 
 td, th{
@@ -80,11 +82,11 @@ td{
 }
 
 th, td{
-  padding: 6px;    box-shadow: 0 0 8px 8px white inset;
+  padding: 6px;
 }
 
 tr:nth-child(even) td{
-  background: #F1F1F1;
+  background: rgb(155, 176, 202);
 }
 
 tr:nth-child(odd) td{
