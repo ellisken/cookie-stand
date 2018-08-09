@@ -1,5 +1,5 @@
-img, nav, fieldset, form, label, legend,
-table, tbody, tfoot, thead, footer, header, a {
+main, nav, fieldset, form, label, legend,
+tbody, tfoot, thead, footer, header, a {
 	margin: 10px;
   padding: 0;
   /* outline: 2px black dashed; */
@@ -9,16 +9,17 @@ nav{
   padding: 10px;
   margin: 10px;
   overflow: auto;
-  width: 98%;
+  width: auto;
+  /* outline: 2px green dashed; */
 }
 
 .navlink{
-  float: right;
   color: black;
+  display: inline-block;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 h1{
@@ -28,16 +29,16 @@ h1{
 
 h1, h2, h3, h4, h5, h6{
   margin: 10px;
-  padding: 0;
+  padding: 10px;
   /* outline: 2px red dashed; */
+  font-family: "Fjalla One";
 }
 
 div{
   margin: 10px, 10px, 10px, 10px;
   padding: 10px;
   /* outline: 2px blue dashed; */
-  overflow: auto;
-  width: 100%;
+  width: auto;
 }
 
 p{
@@ -103,35 +104,35 @@ thead, tfoot{
 }
 
 
-.ALCdiv{
-  width: 30%;
-  float: left;
-  margin: 10px;
+div.ALCdiv{
+  width: 250px;
+  display: inline-block;
+  margin: 20px;
   padding: 5px;
+  vertical-align: top;
 }
 
-#main-title, #salmon{
-  float: left;
+div.ALCdiv h2{
+  font-size: 25px;
 }
 
-#salmon{
-  max-width: 15%;
-}
-
-#three-main-columns{
-  overflow: auto;
-  width: 100%;
+main{
+  max-width: auto;
+  text-align: center;
 }
 
 #welcome-div{
-  background-image: url(../img/ganapathy-kumar-113604-unsplash.jpg);
-  background-size: cover;
+  background-image: url(../assets/salmon.png);
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
   height: 400px;
+  background-color: salmon;
   box-shadow: 0 0 8px 8px white inset;
 }
 
 #main-title{
-  display: inline;
+  display: inline-block;
 }
 
 #introduction-p{
