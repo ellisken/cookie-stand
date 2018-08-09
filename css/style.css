@@ -2,7 +2,7 @@ main, nav, fieldset, form, label, legend,
 tbody, tfoot, thead, footer, header, a {
 	margin: 10px;
   padding: 0;
-  outline: 2px black dashed;
+  /* outline: 2px black dashed; */
 }
 
 body{
@@ -14,7 +14,7 @@ nav{
   padding: 10px;
   margin: 10px;
   width: auto;
-  outline: 2px green dashed;
+  /* outline: 2px green dashed; */
 }
 
 .navlink{
@@ -35,27 +35,33 @@ h1{
 h1, h2, h3, h4, h5, h6{
   margin: 10px;
   padding: 10px;
-  outline: 2px red dashed;
+  /* outline: 2px red dashed; */
   font-family: "Fjalla One";
 }
 
 div{
   margin: 10px, 10px, 10px, 10px;
   padding: 10px;
-  outline: 2px blue dashed;
+  /* outline: 2px blue dashed; */
   width: auto;
+}
+
+.ALCdiv img{
+  height: 120px;
+  width: auto;
+  border-radius: 50%;
 }
 
 p{
   margin: 10px;
   padding: 10px;
-  outline: 2px purple dashed;
+  /* outline: 2px purple dashed; */
 }
 
 ul{
   margin: 10px;
   padding: 10px;
-  outline: 2px pink dashed;
+  /* outline: 2px pink dashed; */
 }
 
 table{
@@ -137,7 +143,7 @@ main{
 #introduction-p{
   text-align: center;
   font-family: "Fjalla One";
-  color: whitesmoke;
+  color: #3c4663;
   font-size: 24px;
 }
 
