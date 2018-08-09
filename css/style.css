@@ -7,11 +7,12 @@ tbody, tfoot, thead, footer, header, a {
 
 body{
   background-color:whitesmoke;
-  color: #3c4663;
+  color: rgb(102, 98, 110);
 }
 
 table{
   margin: auto;
+  background-color: lightsteelblue;
 }
 
 
@@ -46,6 +47,8 @@ h1, h2, h3, h4, h5, h6, legend{
   padding: 10px;
   /* outline: 2px red dashed; */
   font-family: "Fjalla One";
+  color: #3c4663;
+  
 }
 
 div{
