@@ -1,5 +1,8 @@
 'use strict';
 
+var storeCt = 0; //Global variable for tracking number of stores - updates
+var hourCt = 15; //Global variable for tracking number of hours to display
+
 /*********************************************************
  *                     Define functions
  *********************************************************/
@@ -11,17 +14,14 @@ function Store(name, maxCustomers, minCustomers, avgCookiesPerCustomer){
   this.avgCookiesPerCust = avgCookiesPerCustomer;
 }
 
-//sum function used for .reduce()
-function sum(a, b){
-  return a + b;
-}
 
-
-// Generates a random whole number of customers
+// Generates a random int of customers
 // within the range of [minCust, maxCust]
-// rounding down
+// rounding down to the nearest whole number
 function customersPerHour(){
-  return Math.floor(Math.random() * (this.maxCust - this.minCust) + this.minCust);
+  var min = Math.ceil(this.minCust);
+  var max = Math.floor(this.maxCust);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 
@@ -30,22 +30,13 @@ function customersPerHour(){
 // rounding down
 function getHourlySales(){
   //For each hour in the workday (6am - 8pm)
-  //generate a projected sales per hour and store 
+  //generate a projected sales per hour and store
   //in the salesPerHour array
   var salesArray = [];
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < hourCt; i++){
     salesArray.push(Math.floor(this.avgCookiesPerCust * this.getHourlyCustomers()));
   }
   return salesArray;
-}
-
-
-//Adds a child of the given elementType with the
-//specified textContent to parent
-function addChildWithText(elementType, textContent, parent){
-  var newElement = document.createElement(elementType);
-  newElement.textContent = textContent;
-  parent.appendChild(newElement);
 }
 
 
@@ -64,10 +55,10 @@ function addStoreTable(){
   //Create a header row
   thRow.appendChild(document.createElement('th'));
   //Create a column name for each hour of the store's day
-  for(var i=0; i < 15; i++){
+  for(var i=0; i < hourCt; i++){
     var hour = (i + 6) % 24; //Get actual hour
     //Set am/pm
-    if(hour > 12){ 
+    if(hour > 12){
       hour = (hour - 12) + 'pm';
     }
     else if(hour === 12){
@@ -84,7 +75,7 @@ function addStoreTable(){
   columnName = document.createElement('th');
   columnName.textContent = 'Sales Total';
   thRow.appendChild(columnName);
-  
+
   storeTable.appendChild(tableHeader);
   //Create table body
   var body = document.createElement('tbody');
@@ -109,9 +100,9 @@ function renderStoreData(){
 
   var total = 0; //For tracking total sales for a store
 
-  //For each attribute, create a cell
+  //Generate hourly sales data and save for later use
   var storeSalesData = this.getHourlySales();
-  //console.log(storeSalesData);
+  //Add a cell for each hour's data
   for(var i=0; i < storeSalesData.length; i++){
     var salesDataCell = document.createElement('td');
     salesDataCell.textContent = storeSalesData[i];
@@ -119,6 +110,7 @@ function renderStoreData(){
     storeRow.appendChild(salesDataCell);
     total += storeSalesData[i];
   }
+  //Add a cell for the day's total sales
   salesDataCell = document.createElement('td');
   salesDataCell.textContent = total;
   storeRow.appendChild(salesDataCell);
@@ -138,13 +130,12 @@ function createSalesDataArray(){
   }
 
   //Multi-dimensional array to store table data
-  //There will be 
   var salesDataMatrix = [];
 
   //Grab items from tableCells in chunks of 16
   // for each of the 5 stores
   var k = 1;
-  for(var i=0; i < stores.length; i++){
+  for(var i=0; i < storeCt; i++){
     //For each chunk of 16, add to a list
     //Add that list to salesDataMatrix
     var dataRow = tableCellData.slice((k-1) * 16, k * 16);
@@ -155,14 +146,23 @@ function createSalesDataArray(){
 }
 
 
-
 // Adds a footer with sales totals for each hour to the table
 function addHourlyTotalsFooter(){
   var table = document.getElementById('store-table');
 
   //Create a table footer, append to table
   var footer = document.createElement('tfoot');
-  table.appendChild(footer);
+
+  //If table footer exists
+  var tableFooter = document.getElementsByTagName('tfoot')[0];
+  if(tableFooter !== undefined){
+    //Replace element
+    tableFooter.parentNode.replaceChild(footer, tableFooter);
+  }
+  //Else append new element
+  else{
+    table.appendChild(footer);
+  }
 
   //Create a table row, append to footer
   var footerRow = document.createElement('tr');
@@ -170,7 +170,7 @@ function addHourlyTotalsFooter(){
 
   //Add a dummy cell for the first column
   footerRow.appendChild(document.createElement('td'));
-  
+
   //Get sales data from the DOM
   var salesDataArray =  createSalesDataArray();
 
@@ -179,13 +179,34 @@ function addHourlyTotalsFooter(){
   for(var i=0; i < 16; i++){
     //calculate that column's total
     var total = 0;
-    for(var j=0; j < 5; j++){
+    for(var j=0; j < storeCt; j++){
       total += parseInt(salesDataArray[j][i]);
     }
     var newDataCell = document.createElement('td');
     newDataCell.textContent = total;
     footerRow.appendChild(newDataCell);
   }
+}
+
+
+// Gets form data and adds new row to table
+// for the new store
+function addNewStoreToTable(e){
+  //Prevent default page refresh
+  e.preventDefault();
+
+  //Get form values and instantiate new Store object
+  var newStore = new Store(e.target.name.value,
+    e.target.maxCustCt.value, e.target.minCustCt.value, e.target.avgPurchaseCt.value);
+
+  //Add that store's values to the table by appending to
+  //the table body
+  newStore.createStoreRow();
+
+  storeCt++; //Increment global store count
+
+  //Update the table footer
+  addHourlyTotalsFooter();
 }
 
 
@@ -200,25 +221,32 @@ Store.prototype.createStoreRow = renderStoreData;
 /*********************************************************
  *                    Start Page Action
  *********************************************************/
-var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2], 
+var storeData = [['First and Pike', 23, 65, 6.3], ['Seatac', 3, 24, 1.2],
   ['Seattle Center', 11, 38, 3.7], ['Capitol Hill', 20, 38, 2.3], ['Alki', 2, 16, 4.6]];
 
-//Create stores
+//Create first 5 stores
 var firstAndPike, seatac, seattleCenter, capitolHill, alki;
 var stores = [firstAndPike, seatac, seattleCenter, capitolHill, alki];
 for(var i=0; i < stores.length; i++){
   stores[i] = new Store(storeData[i][0], storeData[i][1], storeData[i][2], storeData[i][3]);
+  storeCt++;
 }
 
 //Create table
 addStoreTable();
 
 //Add store data to table
-for(i=0; i < stores.length; i++){
+for(i=0; i < storeCt; i++){
   stores[i].createStoreRow();
 }
 
 //Add footer with hourly totals
 addHourlyTotalsFooter();
+
+//Add event listener to form submit
+var submitFormButton = document.getElementById('addNewStoreForm');
+submitFormButton.addEventListener('submit', addNewStoreToTable);
+
+
 
 
