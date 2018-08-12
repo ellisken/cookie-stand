@@ -1,43 +1,67 @@
-img, nav, fieldset, form, label, legend,
-table, tbody, tfoot, thead, footer, header, a {
+main, nav, fieldset, label, legend,
+tbody, tfoot, thead, footer, header, a {
 	margin: 10px;
   padding: 0;
   /* outline: 2px black dashed; */
 }
 
+body{
+  background-color:whitesmoke;
+  color: rgb(102, 98, 110);
+}
+
+table{
+  margin: auto;
+  background-color: lightsteelblue;
+}
+
+
 nav{
   padding: 10px;
   margin: 10px;
-  overflow: auto;
-  width: 98%;
+  width: auto;
+  /* outline: 2px green dashed; */
+}
+
+form, fieldset{
+  text-align: left;
 }
 
 .navlink{
-  float: right;
-  color: black;
+  color: #3c4663;
+  display: inline-block;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
+  font-family: "Fjalla One";
 }
 
 h1{
-  font-size: 36px;
+  font-size: 45px;
   margin: 10px;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, legend{
   margin: 10px;
-  padding: 0;
+  padding: 10px;
   /* outline: 2px red dashed; */
+  font-family: "Fjalla One";
+  color: #3c4663;
+  
 }
 
 div{
   margin: 10px, 10px, 10px, 10px;
   padding: 10px;
   /* outline: 2px blue dashed; */
-  overflow: auto;
-  width: 100%;
+  width: auto;
+}
+
+.ALCdiv img{
+  height: 120px;
+  width: auto;
+  border-radius: 50%;
 }
 
 p{
@@ -52,12 +76,6 @@ ul{
   /* outline: 2px pink dashed; */
 }
 
-img{
-  border-radius: 50%;
-  max-width: 100%;
-  max-height: 100%;
-}
-
 table{
   font-family: Helvetica, sans-serif;
   width: 640px;
@@ -70,7 +88,7 @@ td, th{
   border: 1px solid transparent;
   height: 30px;
   transition: all 0.3s;
-  padding: 3px;
+  padding: 9px;
 }
 
 th{
@@ -79,10 +97,7 @@ th{
 
 td{
   text-align: center;
-}
-
-th, td{
-  padding: 6px;
+  vertical-align: center;
 }
 
 tr:nth-child(even) td{
@@ -103,46 +118,80 @@ thead, tfoot{
 }
 
 
-.ALCdiv{
-  width: 30%;
-  float: left;
-  margin: 10px;
+div.ALCdiv{
+  width: 250px;
+  display: inline-block;
+  margin: 20px;
   padding: 5px;
+  vertical-align: top;
 }
 
-#main-title, #salmon{
-  float: left;
+div.ALCdiv h2{
+  font-size: 25px;
 }
 
-#salmon{
-  max-width: 15%;
+h1.sales-page, legend{
+  font-size: 30px;
 }
 
-#three-main-columns{
-  overflow: auto;
-  width: 100%;
+label, input{
+  margin: 3px;
+  margin-bottom: -5px;
+  display: block;
+  width: 300px;
+}
+
+main{
+  max-width: auto;
+  text-align: center;
 }
 
 #welcome-div{
-  background-image: url(../img/ganapathy-kumar-113604-unsplash.jpg);
-  background-size: cover;
+  background-image: url(../assets/salmon.png);
+  background-repeat: no-repeat;
+  background-size: 65%;
+  background-position: center;
   height: 400px;
-  box-shadow: 0 0 8px 8px white inset;
+  background-color: salmon;
+  box-shadow: 0 0 8px 8px white inset; */
 }
 
 #main-title{
-  display: inline;
+  display: inline-block;
 }
 
 #introduction-p{
   text-align: center;
-  font-family: sans-serif;
-  color: black;
+  font-family: "Fjalla One";
+  color: #3c4663;
+  font-size: 24px;
 }
 
 #about{
-  font-size: 50px;
+  font-size: 45px;
   font-family: 'Fjalla One';
   text-align: center;
   color: whitesmoke;
+}
+
+#store-data{
+  text-align: center;
+  width: auto;
+  padding: 15px;
+}
+
+#newStoreForm{
+  width: 500px;
+}
+
+#form-submit{
+  position: relative;
+  left: 10px;
+  font-family: "Fjalla One";
+  margin-bottom: 10px;
+}
+
+#addNewStoreDiv{
+  padding: 0px;
+  margin: 30px;
 }
