@@ -244,7 +244,7 @@ for(i=0; i < storeCt; i++){
 addHourlyTotalsFooter();
 
 //Add event listener to form submit
-var submitFormButton = document.getElementById('addNewStoreForm');
+var submitFormButton = document.getElementById('newStoreForm');
 submitFormButton.addEventListener('submit', addNewStoreToTable);
 
 
