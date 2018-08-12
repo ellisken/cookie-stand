@@ -146,6 +146,12 @@ main{
   text-align: center;
 }
 
+ul li{
+  text-align: left;
+  list-style-position: inside;
+}
+
+
 #welcome-div{
   background-image: url(../assets/salmon.png);
   background-repeat: no-repeat;
